@@ -7,4 +7,4 @@ Some Screens from Dribble
 
 ## Описание
 
-Сверстал рандомный экран с Dribble. iOS15/SwiftUI
+Верстка UI рандомного экрана с Dribble на iOS 15 сделанная с использованием SwiftUI
