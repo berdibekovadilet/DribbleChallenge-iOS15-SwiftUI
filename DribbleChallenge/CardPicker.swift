@@ -1,0 +1,84 @@
+//
+//  CardPicker.swift
+//  DribbleChallenge
+//
+//  Created by Adilet Berdibekov on 22.11.2021.
+//
+
+import SwiftUI
+
+enum SearchFilter: String, CaseIterable {
+    case recent = "Recent"
+    case trending = "Trending"
+    case popular = "Popular"
+    case premium = "Premium"
+}
+struct CardPicker: View {
+    @State private var selection: SearchFilter = .recent
+    
+    var body: some View {
+        HStack {
+            ForEach(SearchFilter.allCases, id: \.self) { filter in
+                CardPickerItem(searchFilter: filter, selection: selection)
+                    .onTapGesture {
+                        selection = filter
+                    }
+                if filter != .premium {
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
+struct CardPickerItem: View {
+    
+    let searchFilter: SearchFilter
+    let selection: SearchFilter
+    
+    var imageName: String {
+        switch searchFilter {
+        case .recent:
+            return "clock"
+        case .trending:
+            return "flame"
+        case .popular:
+            return "crown"
+        case .premium:
+            return "diamond"
+        }
+    }
+    
+    var backgroundColor: Color {
+        searchFilter == selection ? Color("Secondary") : Color("BackgroundFields")
+    }
+    
+    var tintColor: Color {
+        searchFilter == selection ? Color("Secondary") : Color.gray
+    }
+    
+    var body: some View {
+        VStack {
+            Image(systemName: imageName)
+                .padding()
+                .foregroundColor(selection == searchFilter ? Color.white : Color.gray)
+                .background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
+            Text(searchFilter.rawValue)
+                .foregroundColor(tintColor)
+                .modifier(FootNote())
+        }
+        
+    }
+}
+
+struct CardPicker_Previews: PreviewProvider {
+    static var previews: some View {
+        CardPicker()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("Background1"))
+//        CardPickerItem(searchFilter: .premium, selection: .recent)
+//            .previewLayout(.fixed(width: 200, height: 200))
+//        CardPickerItem(searchFilter: .trending, selection: .trending)
+//            .previewLayout(.fixed(width: 200, height: 200))
+    }
+}
