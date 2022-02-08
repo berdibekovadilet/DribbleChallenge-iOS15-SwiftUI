@@ -1,7 +1,7 @@
 # DribbleChallenge-iOS15-SwiftUI
 Some Screens from Dribble
 
-![Dicee Banner](Documentation/screen.png)
+![Screen Banner](Documents/screen.png)
 
 # DribbleChallenge
 
